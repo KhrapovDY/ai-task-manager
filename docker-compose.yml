@@ -20,6 +20,34 @@ services:
       timeout: 5s
       retries: 10
 
+  backend:
+    build:
+      context: ./backend
+    container_name: ai-task-manager-backend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: ${BACKEND_PORT:-3000}
+      DB_HOST: db
+      DB_PORT: 5432
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:5173}
+    ports:
+      - "${BACKEND_PORT:-3000}:${BACKEND_PORT:-3000}"
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - "fetch('http://localhost:3000/health').then((response) => { if (!response.ok) process.exit(1) }).catch(() => process.exit(1))"
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
 volumes:
   postgres_data:
-
