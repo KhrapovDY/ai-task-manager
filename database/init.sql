@@ -9,4 +9,3 @@ CREATE TABLE IF NOT EXISTS tasks (
         status IN ('new', 'in_progress', 'done')
     )
 );
-
