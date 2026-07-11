@@ -108,7 +108,7 @@ docker compose up -d --build
 ### 4. Проверка контейнеров
 
 ```powershell
-docker compose ps
+docker ps
 ```
 
 Контейнеры базы данных, backend и frontend должны иметь состояние `healthy`.
@@ -141,7 +141,7 @@ curl.exe http://localhost:3000/tasks
 Просмотр логов:
 
 ```powershell
-docker compose logs
+docker logs --tail 4 ai-task-manager-backend
 ```
 
 REST API:
