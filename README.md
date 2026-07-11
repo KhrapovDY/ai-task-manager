@@ -171,5 +171,3 @@ python scripts/export_tasks.py
 ```powershell
 docker compose down
 ```
-
-Данные PostgreSQL сохраняются в Docker volume и не удаляются при обычной остановке.
