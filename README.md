@@ -17,12 +17,10 @@ AI Task Manager — учебное веб-приложение для управ
 
 ## Стек технологий
 
-- Frontend: React + JavaScript + Vite;
-- Backend: Node.js + Express;
-- база данных: PostgreSQL;
-- дополнительно: Python;
-- Docker Compose;
-- Git и GitHub.
+- Frontend: React + JavaScript.
+- Backend: Node.js + Express.
+- база данных: PostgreSQL.
+- дополнительно: Python.
 
 ## Возможности
 
@@ -84,7 +82,7 @@ AI Task Manager — учебное веб-приложение для управ
 
 ## Запуск приложения
 
-Для запуска должны быть установлены Git и Docker Desktop. Docker Desktop должен быть запущен.
+Для запуска должен быть установлен и запущен Docker Desktop.
 
 ### 1. Клонирование проекта
 
@@ -93,33 +91,29 @@ git clone https://github.com/KhrapovDY/ai-task-manager.git
 cd ai-task-manager
 ```
 
-### 2. Создание файла настроек
+Также проект можно скачать с GitHub.
+
+### 2. Запуск Docker-контейнеров
+
+В корневой папке проекта выполните:
 
 ```powershell
-Copy-Item .env.example .env
+docker compose --env-file .env.example up -d --build
 ```
 
-### 3. Запуск Docker-контейнеров
+Команда использует настройки из файла .env.example, собирает приложение и запускает три контейнера.
 
-```powershell
-docker compose up -d --build
-```
-
-### 4. Проверка контейнеров
+### 3. Проверка контейнеров
 
 ```powershell
 docker ps
 ```
 
-Контейнеры базы данных, backend и frontend должны иметь состояние healthy.
+Состояние healthy означает, что контейнер запущен и успешно прошёл проверку работоспособности.
 
-### 5. Открытие приложения
+### 4. Открытие веб-приложения
 
-Откройте в браузере:
-
-```text
-http://localhost:5173
-```
+Откройте в браузере: `http://localhost:5173`.
 
 Backend работает по адресу `http://localhost:3000`.
 
@@ -130,19 +124,6 @@ Backend работает по адресу `http://localhost:3000`.
 3. Измените статус через выпадающий список.
 4. Обновите страницу и проверьте сохранение статуса.
 5. Удалите задачу.
-
-Проверка backend:
-
-```powershell
-curl.exe http://localhost:3000/health
-curl.exe http://localhost:3000/tasks
-```
-
-Просмотр логов:
-
-```powershell
-docker logs --tail 4 ai-task-manager-backend
-```
 
 REST API:
 
